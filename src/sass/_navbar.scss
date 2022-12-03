@@ -1,0 +1,20 @@
+@use './variables.scss' as *;
+@use './breakpoint.scss' as *;
+
+.custom-nav{
+    background-color: $skyblue;
+}
+.navbar-toggler{
+    background-color: white;
+    border: white;
+    outline: none;
+}
+
+.nav-item{
+    display: grid;
+    margin-left: 60px;
+    @include tablet-min{
+        margin-left: 20px;
+    }
+}
+

@@ -1,0 +1,152 @@
+@use './variables.scss' as *;
+@use './breakpoint.scss' as *;
+
+.login-body{
+    text-align: center;
+    @include tablet-min{
+        height: auto;
+        display: flex;
+        justify-content: center;
+        flex-direction: row;
+    }
+}
+
+.login-cont{
+    @include tablet-min{
+        display: flex;
+        border-radius: 20px;
+        margin-top: 8.5%;
+        -webkit-box-shadow: 5px 7px 7px 5px rgba(211,211,211,0.6); 
+        box-shadow: 5px 7px 7px 5px rgba(211,211,211,0.6);
+    }
+    
+    @include laptop-min{
+        height: 500px;
+    }
+}
+
+.astronaut-star {
+    width: 350px;
+    height: 350px;
+
+    @include tablet-min{
+        border-top-left-radius: 20px;
+        border-bottom-left-radius: 20px;
+        width: 450px;
+        height: 450px;
+    }
+
+    @include laptop-min{
+        width: 500px;
+        height: 500px;
+    }   
+}
+
+.left-container{
+    background-color: $skyblue;
+    height: 400px;
+
+    @include tablet-min{
+        background-color: white;
+        width: 450px;
+        height: 450px;
+    }
+
+    @include laptop-min{
+        width: 500px;
+        height: 500px;
+    }
+}
+
+.right-container{
+    padding: 20px;
+    margin-bottom: 30px;
+
+    @include tablet-min{
+        width: 450px;
+        height: 450px;
+        padding: 10px;
+        margin-bottom: 0;
+    }
+
+    @include laptop-min{
+        width: 500px;
+        height: 500px;
+        padding: 20px;
+    }
+}
+
+.login-text{
+    @include tablet-min{
+        text-align: center;
+    }
+}
+
+.login-title{
+    font-size: 30px;
+    font-weight: bold;
+    color: $skyblue;
+    margin-top: 25px;
+    @include tablet-min{
+        margin-bottom: 16px;
+        margin-top: 10px;
+    }
+    @include laptop-min{
+        font-size: 36px;
+    }
+}
+
+.login-par{
+    font-size: 14px;
+    margin-bottom: 14px;
+    margin: 16px 8px;
+    @include laptop-min{
+        font-size: 16px;
+    }
+}
+
+.cont-form{
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+}
+
+form{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+label{
+    font-size: 14px;
+    margin-bottom: 10px;
+    text-align: left;
+}
+
+.label-email{
+    margin-top: 10px;
+    @include tablet-min{
+        margin-top: 0px;
+    }
+}
+
+.label-password{
+    margin-top: 30px;
+}
+
+.button-submit{
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    background-color: $skyblue;
+    border: 1px solid $skyblue;
+    padding: 8px 15px 8px 15px;
+    border-radius: 10px;
+    margin-top: 50px;
+    @include tablet-min{
+        margin-top: 35px;
+    }
+    @include laptop-min{
+        margin-top: 40px;
+    }
+}
