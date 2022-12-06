@@ -4,19 +4,19 @@
             :key="movie.id">
             {{movie.title}}
             {{movie.release_date}}
+            <button v-show="!showButton(movie.id)" type="submit" @click="storeMovie(movie.id)" >
+                Aggiungi
+            </button>
+            <button v-show="showButton(movie.id)" type="submit" @click="removeMovie(movie.id)">
+                Rimuovi
+            </button>
 
-
+            <div>
+                {{showButton(movie.id)}}
+            </div>
 
         </div>
-        <button onclick="addToWatchList()" id="addWatchlist">
-            Aggiungi
-        </button>
-        <button id="removeWatchlist">
-            Rimuovi
-        </button>
-        <button id="viewWatchlist">
-            Visualizza
-        </button>
+        
     </div>
 </template>
 
@@ -29,7 +29,8 @@ import axios from 'axios'
         data () {
             return {
                 movies: [],
-                
+                watchlist: [],
+                movie: null,
             }
         },
         mounted () {
@@ -37,7 +38,7 @@ import axios from 'axios'
                 .get('https://api.themoviedb.org/3/movie/popular?api_key=12a60b0a52be8853f488359f4a303575&language=it-IT&page=1&include_adult=false&region=IT')
                 .then(response => {
                     this.movies = response.data.results
-                    console.log(response.data.results)
+                    // console.log(response.data.results)
                 })
                 .catch(error => {
                     console.log(error)
@@ -45,14 +46,33 @@ import axios from 'axios'
                 })
                 .finally(() => this.loading = false)
         },
-        computed: {
-            sortedItems: function() {
-                this.movies.sort( ( a, b) => {
-                    return new Date(a.release_date) - new Date(b.release_date);
-                });
-                return this.movies;
+        methods: {
+            storeMovie(id) {
+                const favouriteMovie = this.movies.find(movie => movie.id === id )
+                
+                this.watchlist.push(favouriteMovie);
+
+                localStorage.setItem("watchlist", JSON.stringify(this.watchlist));
+
+            },
+            removeMovie(id) {
+                const removedMovie = this.watchlist.find(movie => movie.id === id )
+                const indexMovie = this.watchlist.indexOf(removedMovie);
+                if (indexMovie > -1) { 
+                   this.watchlist.splice(indexMovie, 1); 
+                }
+
+                localStorage.setItem("watchlist", JSON.stringify(this.watchlist));
+            },
+            showButton(id) {
+                const favouriteMovie = this.watchlist.find(movie => movie.id === id )
+                if (favouriteMovie && favouriteMovie.length > 0) {
+                    return true
+                } else{
+                    return false
+                }
             }
-        }, 
+        },
     }
 </script>
 
