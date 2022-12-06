@@ -10,13 +10,13 @@
             <button v-show="showButton(movie.id)" type="submit" @click="removeMovie(movie.id)">
                 Rimuovi
             </button>
-
-            <div>
-                {{showButton(movie.id)}}
-            </div>
-
+            
         </div>
         
+        <div class="card" v-for="favourite in watchlist"
+            :key="favourite.id">
+            {{favourite.title}}
+        </div>
     </div>
 </template>
 
