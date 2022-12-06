@@ -13,7 +13,7 @@ const routes = [
       component: HomeComp
     },
     {
-      path: '/viewmovie',
+      path: '/viewmovie/:id?',
       name: 'ViewComp',
       component: ViewComp
     },

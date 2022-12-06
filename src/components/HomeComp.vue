@@ -4,17 +4,21 @@
             :key="movie.id">
             {{movie.title}}
             {{movie.release_date}}
-            <button v-show="!showButton(movie.id)" type="submit" @click="storeMovie(movie.id)" >
+            <img width="300" :src="`https://image.tmdb.org/t/p/w342/${movie.poster_path}`" alt="">
+            <button v-show="!showButton(movie.id)" type="submit" @click="storeMovie(movie.id)">
                 Aggiungi
             </button>
             <button v-show="showButton(movie.id)" type="submit" @click="removeMovie(movie.id)">
                 Rimuovi
             </button>
-            
+            <router-link :to="`/viewmovie/${movie.id}`">
+                Vai al film
+            </router-link>
         </div>
         
-        <div class="card" v-for="favourite in watchlist"
-            :key="favourite.id">
+        <div v-for="(favourite, index) in getItem"
+        :key="index"
+        class="card">
             {{favourite.title}}
         </div>
     </div>
@@ -30,6 +34,11 @@ import axios from 'axios'
                 movies: [],
                 watchlist: [],
                 movie: null,
+            }
+        },
+        computed: {
+            getItem(){ 
+                return JSON.parse(localStorage.getItem("watchlist"));
             }
         },
         mounted () {
@@ -65,12 +74,12 @@ import axios from 'axios'
             },
             showButton(id) {
                 const favouriteMovie = this.watchlist.find(movie => movie.id === id )
-                if (favouriteMovie && favouriteMovie.length > 0) {
+                if (favouriteMovie) {
                     return true
                 } else{
                     return false
                 }
-            }
+            },
         },
     }
 </script>
