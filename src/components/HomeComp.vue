@@ -15,7 +15,10 @@
                 Vai al film
             </router-link>
         </div>
-        
+
+        <div>
+            Watchlist:
+        </div>
         <div v-for="(favourite, index) in getItem"
         :key="index"
         class="card">
