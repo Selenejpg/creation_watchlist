@@ -1,10 +1,19 @@
 <template>
     <div>
-        <div v-for="info in movieInfo"
-            :key="info.id">
+        <img width="300" :src="`https://image.tmdb.org/t/p/w342/${movieInfo.poster_path}`" alt="">
+        <br>
+        {{movieInfo.title}}
+        <br>
+        {{movieInfo.tagline}}
+        <br>
+        {{movieInfo.overview}}
+        <br>
+        {{movieInfo.release_date}}
+        <br>
+        {{movieInfo.original_language}}
 
-            {{info.id}}
-        </div>
+        
+        
     </div>
 </template>
 
@@ -15,15 +24,15 @@ import axios from 'axios'
         name: 'ViewComp',
         data() {
             return{
-                movieInfo: [],
+               movieInfo: "", 
             }
         },
         mounted () {
             axios
-                .get('https://api.themoviedb.org/3/movie/popular?api_key=12a60b0a52be8853f488359f4a303575&language=it-IT&page=1&include_adult=false&region=IT')
+                .get(`https://api.themoviedb.org/3/movie/${this.$route.params.id}?api_key=12a60b0a52be8853f488359f4a303575&language=it-IT`)
                 .then(response => {
-                    this.movieInfo = response.data.results
-                    //console.log(response.data.results)
+                    this.movieInfo = response.data   
+                    console.log(response.data)
                 })
                 .catch(error => {
                     console.log(error)
@@ -31,24 +40,6 @@ import axios from 'axios'
                 })
                 .finally(() => this.loading = false)
         },
-        methods: {
-            confrontID(){
-                var pageURL = window.location.href;
-                console.log(pageURL);
-                var idUrl = pageURL.substring(pageURL.lastIndexOf('/') + 1);
-                console.log(idUrl);
-                var idMovie = this.info.id;
-
-                if (idUrl === idMovie) {
-                    return idUrl;
-                }
-                
-            },
-            getObject(){
-                const object = this.movieInfo.find(obj => obj.id === this.idUrl);
-                console.log(object);
-            }
-        }
     }
 
     

@@ -16,7 +16,7 @@
             </router-link>
         </div>
 
-        <div>
+        <div class="mt-4 fs-1">
             Watchlist:
         </div>
         <div v-for="(favourite, index) in getItem"
